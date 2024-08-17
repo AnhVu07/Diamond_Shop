@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="2" author="author">
+        <createTable tableName="users">
+            <column name="id" type="INT">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="pk_users_id"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="display_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="LONGTEXT"/>
+            <column name="enabled" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="auth_provider" type="VARCHAR(255)"/>
+            <column name="reset_password_token" type="VARCHAR(255)"/>
+        </createTable>
+
+        <createIndex indexName="inx_user_email" tableName="users">
+            <column name="email"/>
+        </createIndex>
+    </changeSet>
+
+   
+    <changeSet id="3" author="author">
+        <createTable tableName="users_roles">
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <constraints primaryKey="true" primaryKeyName="pk_users_roles">
+                <keyColumn name="user_id"/>
+                <keyColumn name="role_id"/>
+            </constraints>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
